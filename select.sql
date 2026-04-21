@@ -1,10 +1,23 @@
+seleciona todos os usuarios
 select * FROM usuarios;
+SELECT * FROM usuarios;
+SELECT * FROM usuarios; 
 
+-- seleciona por id
 select * FROM usuarios where id=2;
+SELECT * FROM usuarios WHERE id = 1;
+SELECT * FROM usuarios WHERE id = 2;
 
+-- atualizar
 UPDATE usuarios
 SET nome = 'pedro'
 where id = 2;
+
+UPDATE usuarios
+SET NOME = 'fABIO'
+WHERE ID = 1;
+UPDATE USUARIOS SET SENHA = 123456 WHERE ID = 3
+
 
 UPDATE usuarios
 SET nome = 'Ana Clara', email = 'ana.clara@email.com'
@@ -70,9 +83,21 @@ FROM pedidos
 GROUP BY usuario_id;
 
 -- Mostre:
+-- "Essa query mostra o nome de cada usuário e quantos pedidos ele fez, juntando as tabelas e agrupando por usuário."
 -- nome do usuário
 -- quantidade de pedidos
 SELECT u.nome, COUNT(p.id) AS total_pedidos
 FROM usuarios u
 JOIN pedidos p ON u.id = p.usuario_id
 GROUP BY u.nome;
+
+-- Mostre:
+-- nome do usuário
+-- quantidade de pedidos
+-- apenas usuários que têm mais de 1 pedido
+
+SELECT u.nome, COUNT(p.id) AS total_pedidos
+FROM usuarios u
+JOIN pedidos p ON u.id = p.usuario_id
+GROUP BY u.nome
+HAVING COUNT(p.id) > 1;
