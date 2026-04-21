@@ -16,7 +16,10 @@ where id = 2;
 UPDATE usuarios
 SET NOME = 'fABIO'
 WHERE ID = 1;
-UPDATE USUARIOS SET SENHA = 123456 WHERE ID = 3
+
+UPDATE USUARIOS 
+SET SENHA = 123456
+WHERE ID = 3
 
 
 UPDATE usuarios
@@ -52,6 +55,15 @@ WHERE usuarios.id = 3;
 SELECT u.nome, p.produto
 FROM usuarios u
 JOIN pedidos p ON u.id = p.usuario_id;
+
+SELECT U.nome, p.produto
+FROM usuarios u
+JOIN pedidos p on u.id = p.ususarios_id;
+
+SELECT u.nome, p.produto
+FROM usuarios u
+JOIN pedidos p ON u.id = p.usuario_id
+WHERE u.id = 3;
 
 -- Mostra TODOS os usuários, mesmo os que NÃO têm pedidos
 -- Escreva uma query que:
