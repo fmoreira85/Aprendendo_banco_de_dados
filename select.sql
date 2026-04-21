@@ -113,3 +113,28 @@ FROM usuarios u
 JOIN pedidos p ON u.id = p.usuario_id
 GROUP BY u.nome
 HAVING COUNT(p.id) > 1;
+
+SELECT u.nome, p.produto
+FROM usuarios u 
+JOIN pedidos p ON u.id = p.usuario_id
+WHERE u.nome LIKE 'A%'
+ORDER BY u.nome ASC
+
+-- Exercício 3 - SUM
+-- Mostre:
+-- nome do usuário
+-- total gasto (somando preco)
+SELECT u.nome, SUM(p.preco) AS total_gasto
+FROM usuarios u
+JOIN pedidos p ON u.id = p.usuario_id
+GROUP BY u.nome;
+
+-- Mostre:
+-- nome do usuário
+-- total gasto (somando preco)
+SELECT u.nome, SUM(p.preco) AS total_gasto
+FROM usuarios u
+JOIN pedidos p ON u.id = p.usuario_id
+GROUP BY u.nome;
+
+
