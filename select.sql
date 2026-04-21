@@ -211,3 +211,25 @@ FROM usuarios u
 JOIN pedidos p ON u.id = p.usuario_id
 -- Agrupa por nome para calcular a media de cada usuario
 GROUP BY u.nome;
+
+-- Mostra o nome do usuario e o total gasto
+SELECT u.nome, SUM(p.preco) AS total_gasto
+-- Define usuarios como tabela principal
+FROM usuarios u
+-- Junta os usuarios com seus pedidos
+JOIN pedidos p ON u.id = p.usuario_id
+-- Agrupa por nome para somar o total gasto de cada usuario
+GROUP BY u.nome
+-- Filtra apenas usuarios com total gasto maior que a media geral
+HAVING SUM(p.preco) > (
+    SELECT AVG(preco)
+    FROM pedidos
+);
+
+
+SELECT u.nome
+FROM usuarios u
+WHERE u.id IN (
+    SELECT p.usuario_id
+    FROM pedidos p
+);
