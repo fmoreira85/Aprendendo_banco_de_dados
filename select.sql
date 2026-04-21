@@ -129,6 +129,21 @@ FROM usuarios u
 JOIN pedidos p ON u.id = p.usuario_id
 GROUP BY u.nome;
 
+-- Exercício 1 (JOIN + GROUP BY + ORDER BY)
+-- Mostre:
+-- nome do usuário
+-- quantidade de pedidos
+-- ordenado do usuário que tem mais pedidos para o que tem menos
+SELECT u.nome, COUNT(p.id) AS quantidade_pedidos
+-- Define a tabela usuarios com o apelido u
+FROM usuarios u
+-- Junta usuarios com pedidos pelo id do usuario
+JOIN pedidos p ON u.id = p.usuario_id
+-- Agrupa por usuario para contar quantos pedidos cada um fez
+GROUP BY u.nome
+-- Mostra primeiro quem tem mais pedidos
+ORDER BY quantidade_pedidos DESC;
+
 -- Mostre:
 -- nome do usuário
 -- total gasto (somando preco)
@@ -137,4 +152,62 @@ FROM usuarios u
 JOIN pedidos p ON u.id = p.usuario_id
 GROUP BY u.nome;
 
+-- Mostra o nome do usuario e conta quantos pedidos ele fez
+SELECT u.nome, COUNT(p.id) AS quantidade_pedidos
+-- Define usuarios como tabela principal
+FROM usuarios u
+-- Junta apenas os usuarios que possuem pedidos
+JOIN pedidos p ON u.id = p.usuario_id
+-- Agrupa por nome para contar os pedidos de cada usuario
+GROUP BY u.nome
+-- Ordena do maior numero de pedidos para o menor
+ORDER BY quantidade_pedidos DESC;
 
+-- Mostra o nome do usuario e a quantidade de pedidos
+SELECT u.nome, COUNT(p.id) AS quantidade_pedidos
+-- Define usuarios como tabela principal
+FROM usuarios u
+-- LEFT JOIN inclui tambem os usuarios que nao possuem pedidos
+LEFT JOIN pedidos p ON u.id = p.usuario_id
+-- Agrupa por nome para contar os pedidos de cada usuario
+GROUP BY u.nome;
+
+-- Mostra apenas o nome dos usuarios sem nenhum pedido
+SELECT u.nome
+-- Define usuarios como tabela principal
+FROM usuarios u
+-- LEFT JOIN traz todos os usuarios, mesmo os que nao compraram
+LEFT JOIN pedidos p ON u.id = p.usuario_id
+-- Filtra os casos em que nenhum pedido foi encontrado
+WHERE p.id IS NULL;
+
+-- Mostra o nome do usuario e soma o valor gasto nos pedidos
+SELECT u.nome, SUM(p.preco) AS total_gasto
+-- Define usuarios como tabela principal
+FROM usuarios u
+-- Junta os usuarios com seus pedidos
+JOIN pedidos p ON u.id = p.usuario_id
+-- Agrupa por nome para somar o total gasto de cada usuario
+GROUP BY u.nome
+-- Ordena do maior total gasto para o menor
+ORDER BY total_gasto DESC;
+
+-- Mostra o nome do usuario e o total gasto
+SELECT u.nome, SUM(p.preco) AS total_gasto
+-- Define usuarios como tabela principal
+FROM usuarios u
+-- Junta os usuarios com seus pedidos
+JOIN pedidos p ON u.id = p.usuario_id
+-- Agrupa por nome para somar o total gasto de cada usuario
+GROUP BY u.nome
+-- Mostra apenas usuarios com total gasto maior que 500
+HAVING SUM(p.preco) > 500;
+
+-- Mostra o nome do usuario e a media de gasto com pedidos
+SELECT u.nome, AVG(p.preco) AS media_gasto
+-- Define usuarios como tabela principal
+FROM usuarios u
+-- Junta os usuarios com seus pedidos
+JOIN pedidos p ON u.id = p.usuario_id
+-- Agrupa por nome para calcular a media de cada usuario
+GROUP BY u.nome;
