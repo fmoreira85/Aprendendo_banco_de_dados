@@ -19,3 +19,17 @@ WHERE NOT EXISTS (
     FROM pedidos p
     WHERE p.usuario_id = u.id
 );
+
+-- Mostra o nome do usuario, o nome do produto e a quantidade
+SELECT u.nome AS nome_usuario, pr.nome AS nome_produto, p.quantidade
+-- Define pedidos como tabela principal
+FROM pedidos p
+-- Junta pedidos com usuarios pelo id do usuario
+JOIN usuarios u ON p.usuario_id = u.id
+-- Junta pedidos com produtos pelo id do produto
+JOIN produtos pr ON p.produto_id = pr.id;
+  
+  SELECT u.nome AS nome_usuario, pr.nome AS nome_produto, p.quantidade, pr.preco * p.quantidade AS valor_total_item
+FROM pedidos p
+JOIN usuarios u ON p.usuario_id = u.id
+JOIN produtos pr ON p.produto_id = pr.id;
