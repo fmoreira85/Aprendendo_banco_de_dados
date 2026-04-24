@@ -14,3 +14,18 @@ GROUP BY pr.nome
 ORDER BY total_faturado DESC
 -- LIMIT limita a saida para mostrar apenas o primeiro resultado
 LIMIT 1;
+
+
+__ Escreva uma query que mostre:
+-- nome do usuário
+-- total gasto
+-- Apenas usuários com mais de 1 pedido
+
+SELECT
+    u.nome AS nome_usuario,
+    SUM(ip.quantidade * ip.preco_unitario) AS total_gasto
+FROM pedidos p
+JOIN usuarios u ON p.usuario_id = u.id
+JOIN itens_pedido ip ON ip.pedido_id = p.id
+GROUP BY u.nome
+HAVING COUNT(p.id) > 1;
