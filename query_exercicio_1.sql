@@ -1,15 +1,12 @@
 -- Exercicio 1: nome do usuario, nome do produto e quantidade
--- Inicia a consulta
+-- SELECT escolhe quais colunas vao aparecer no resultado
 SELECT
-    -- Mostra o nome do usuario com um apelido na saida
     u.nome AS nome_usuario,
-    -- Mostra o nome do produto com um apelido na saida
     pr.nome AS nome_produto,
-    -- Mostra a quantidade registrada no pedido
     p.quantidade
--- Define a tabela pedidos como tabela principal
+-- FROM define a tabela principal da consulta
 FROM pedidos p
--- Junta com usuarios para pegar o nome de quem fez o pedido
+-- JOIN conecta pedidos com usuarios pela chave relacionada
 JOIN usuarios u ON p.usuario_id = u.id
--- Junta com produtos para pegar o nome do produto
+-- JOIN conecta pedidos com produtos para trazer os dados do produto
 JOIN produtos pr ON p.produto_id = pr.id;

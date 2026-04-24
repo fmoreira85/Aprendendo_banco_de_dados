@@ -1,16 +1,14 @@
 -- Exercicio 5: top produtos vendidos
 -- Mostra o nome do produto e o total vendido, do mais vendido para o menos vendido
--- Inicia a consulta
+-- SELECT escolhe quais colunas vao aparecer no resultado
 SELECT
-    -- Mostra o nome do produto
     pr.nome AS nome_produto,
-    -- Soma a quantidade vendida de cada produto
     SUM(p.quantidade) AS total_vendido
--- Define pedidos como tabela principal
+-- FROM define a tabela principal da consulta
 FROM pedidos p
--- Junta com produtos para pegar o nome de cada produto
+-- JOIN conecta pedidos com produtos para trazer os dados do produto
 JOIN produtos pr ON p.produto_id = pr.id
--- Agrupa por produto para somar as vendas de cada um
+-- GROUP BY agrupa os registros por produto para somar as vendas
 GROUP BY pr.nome
--- Ordena do mais vendido para o menos vendido
+-- ORDER BY ordena o resultado do maior total vendido para o menor
 ORDER BY total_vendido DESC;

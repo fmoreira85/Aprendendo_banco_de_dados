@@ -1,46 +1,61 @@
 -- Mostra o nome dos usuarios que fizeram pedidos
+-- SELECT escolhe quais colunas vao aparecer no resultado
 SELECT u.nome
--- Define usuarios como tabela principal
+-- FROM define a tabela principal da consulta
 FROM usuarios u
--- EXISTS verifica se existe pelo menos 1 pedido para esse usuario
+-- WHERE EXISTS filtra apenas usuarios para os quais a subconsulta encontra pedido
 WHERE EXISTS (
+    -- SELECT 1 e usado apenas para testar a existencia de registros
     SELECT 1
+    -- FROM define a tabela usada dentro da subconsulta
     FROM pedidos p
+    -- WHERE relaciona o pedido com o usuario da consulta principal
     WHERE p.usuario_id = u.id
 );
 
 -- Mostra o nome dos usuarios que nao fizeram pedidos
+-- SELECT escolhe quais colunas vao aparecer no resultado
 SELECT u.nome
--- Define usuarios como tabela principal
+-- FROM define a tabela principal da consulta
 FROM usuarios u
--- NOT EXISTS verifica se nao existe nenhum pedido para esse usuario
+-- WHERE NOT EXISTS filtra apenas usuarios para os quais a subconsulta nao encontra pedido
 WHERE NOT EXISTS (
+    -- SELECT 1 e usado apenas para testar a existencia de registros
     SELECT 1
+    -- FROM define a tabela usada dentro da subconsulta
     FROM pedidos p
+    -- WHERE relaciona o pedido com o usuario da consulta principal
     WHERE p.usuario_id = u.id
 );
 
 -- Mostra o nome do usuario, o nome do produto e a quantidade
+-- SELECT escolhe quais colunas vao aparecer no resultado
 SELECT u.nome AS nome_usuario, pr.nome AS nome_produto, p.quantidade
--- Define pedidos como tabela principal
+-- FROM define a tabela principal da consulta
 FROM pedidos p
--- Junta pedidos com usuarios pelo id do usuario
+-- JOIN conecta pedidos com usuarios para trazer o nome do usuario
 JOIN usuarios u ON p.usuario_id = u.id
--- Junta pedidos com produtos pelo id do produto
+-- JOIN conecta pedidos com produtos para trazer o nome do produto
 JOIN produtos pr ON p.produto_id = pr.id;
-  
-  SELECT u.nome AS nome_usuario, pr.nome AS nome_produto, p.quantidade, pr.preco * p.quantidade AS valor_total_item
+
+-- Mostra o nome do usuario, o nome do produto, a quantidade e o valor total do item
+-- SELECT escolhe quais colunas vao aparecer no resultado
+SELECT u.nome AS nome_usuario, pr.nome AS nome_produto, p.quantidade, pr.preco * p.quantidade AS valor_total_item
+-- FROM define a tabela principal da consulta
 FROM pedidos p
+-- JOIN conecta pedidos com usuarios para trazer o nome do usuario
 JOIN usuarios u ON p.usuario_id = u.id
+-- JOIN conecta pedidos com produtos para trazer os dados do produto
 JOIN produtos pr ON p.produto_id = pr.id;
 
 -- Mostra o nome do usuario e o total gasto somando todos os pedidos dele
+-- SELECT escolhe quais colunas vao aparecer no resultado
 SELECT u.nome AS nome_usuario, SUM(pr.preco * p.quantidade) AS total_gasto
--- Define pedidos como tabela principal
+-- FROM define a tabela principal da consulta
 FROM pedidos p
--- Junta pedidos com usuarios pelo id do usuario
+-- JOIN conecta pedidos com usuarios para trazer o nome do usuario
 JOIN usuarios u ON p.usuario_id = u.id
--- Junta pedidos com produtos pelo id do produto
+-- JOIN conecta pedidos com produtos para trazer o preco do produto
 JOIN produtos pr ON p.produto_id = pr.id
--- Agrupa por usuario para somar todos os itens comprados
+-- GROUP BY agrupa os registros por usuario para somar os gastos
 GROUP BY u.nome;

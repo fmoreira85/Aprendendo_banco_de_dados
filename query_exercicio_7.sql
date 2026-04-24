@@ -1,18 +1,16 @@
 -- Exercicio 7: produto que mais faturou
 -- Mostra o nome do produto e o total faturado, do maior para o menor, exibindo apenas o top 1
--- Inicia a consulta
+-- SELECT escolhe quais colunas vao aparecer no resultado
 SELECT
-    -- Mostra o nome do produto
     pr.nome AS nome_produto,
-    -- Soma o faturamento de cada produto
     SUM(pr.preco * p.quantidade) AS total_faturado
--- Define pedidos como tabela principal
+-- FROM define a tabela principal da consulta
 FROM pedidos p
--- Junta com produtos para pegar o nome e o preco de cada produto
+-- JOIN conecta pedidos com produtos para trazer os dados do produto
 JOIN produtos pr ON p.produto_id = pr.id
--- Agrupa por produto para somar o faturamento individual
+-- GROUP BY agrupa os registros por produto para somar o faturamento
 GROUP BY pr.nome
--- Ordena do maior faturamento para o menor
+-- ORDER BY ordena o resultado do maior faturamento para o menor
 ORDER BY total_faturado DESC
--- Mostra somente o primeiro resultado
+-- LIMIT limita a saida para mostrar apenas o primeiro resultado
 LIMIT 1;
