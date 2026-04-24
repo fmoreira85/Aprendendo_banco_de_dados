@@ -1,9 +1,10 @@
--- Exercicio 2: nome do usuario, nome do produto, quantidade e valor total do item
+-- Exercicio 2: id do pedido, nome do usuario, nome do produto e quantidade
 SELECT
+    p.id AS id_pedido,
     u.nome AS nome_usuario,
     pr.nome AS nome_produto,
-    p.quantidade,
-    pr.preco * p.quantidade AS valor_total_item
+    ip.quantidade
 FROM pedidos p
 JOIN usuarios u ON p.usuario_id = u.id
-JOIN produtos pr ON p.produto_id = pr.id;
+JOIN itens_pedido ip ON ip.pedido_id = p.id
+JOIN produtos pr ON pr.id = ip.produto_id;
