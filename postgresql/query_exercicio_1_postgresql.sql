@@ -5,3 +5,7 @@ SELECT *
 FROM pedidos 
 -- WHERE filtra apenas os pedidos com status pago
 WHERE status = 'pago';
+
+-- Exercicio 1: criar indice na coluna nome
+-- CREATE INDEX cria um indice para acelerar buscas pela coluna nome
+CREATE INDEX idx_nome ON usuarios_perf(nome);

@@ -5,3 +5,12 @@ SELECT cliente_id, SUM(valor)
 FROM pedidos
 -- GROUP BY agrupa os pedidos por cliente
 GROUP BY cliente_id;
+
+-- Exercicio 2: testar busca por nome com EXPLAIN ANALYZE
+-- EXPLAIN ANALYZE mostra o plano de execucao e o tempo gasto na consulta
+EXPLAIN ANALYZE
+SELECT *
+-- FROM define a tabela usada na consulta
+FROM usuarios_perf
+-- WHERE filtra o usuario pelo nome informado
+WHERE nome = 'Usuario 90000';
