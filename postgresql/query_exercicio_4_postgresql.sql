@@ -15,3 +15,9 @@ FROM usuarios_perf
 -- WHERE filtra pelos campos nome e email ao mesmo tempo
 WHERE nome = 'Usuario 50000'
 AND email = 'user50000@email.com';
+
+-- Exercicio 4: criar indice GIN no campo JSON
+-- CREATE INDEX cria um indice para acelerar buscas no campo JSONB
+CREATE INDEX idx_usuarios_config_gin
+ON usuarios_config
+USING GIN (config);

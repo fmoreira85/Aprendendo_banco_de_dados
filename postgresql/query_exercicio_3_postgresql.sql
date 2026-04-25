@@ -12,3 +12,11 @@ HAVING SUM(valor) > 300;
 -- CREATE INDEX cria um indice composto para buscas usando nome e email
 CREATE INDEX idx_nome_email
 ON usuarios_perf(nome, email);
+
+-- Exercicio 3: buscar usuarios com tema dark
+-- SELECT retorna todas as colunas da tabela usuarios_config
+SELECT *
+-- FROM define a tabela usada na consulta
+FROM usuarios_config
+-- WHERE filtra os registros cujo campo tema dentro do JSON seja dark
+WHERE config->>'tema' = 'dark';
