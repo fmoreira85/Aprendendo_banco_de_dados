@@ -18,5 +18,5 @@ ON usuarios_perf(nome, email);
 SELECT *
 -- FROM define a tabela usada na consulta
 FROM usuarios_config
--- WHERE filtra os registros cujo campo tema dentro do JSON seja dark
-WHERE config->>'tema' = 'dark';
+-- WHERE filtra os registros que contem tema dark dentro do JSON
+WHERE config @> '{"tema": "dark"}';

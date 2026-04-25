@@ -19,4 +19,4 @@ WHERE nome = 'Usuario 90000';
 -- INSERT INTO adiciona um novo registro na tabela
 INSERT INTO usuarios_config (nome, config)
 -- VALUES define os valores que serao inseridos
-VALUES ('Usuario 1', '{"tema": "dark", "notificacoes": true}');
+VALUES ('João', '{"tema": "dark", "notificacoes": true}');

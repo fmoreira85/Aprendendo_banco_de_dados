@@ -18,6 +18,6 @@ AND email = 'user50000@email.com';
 
 -- Exercicio 4: criar indice GIN no campo JSON
 -- CREATE INDEX cria um indice para acelerar buscas no campo JSONB
-CREATE INDEX idx_usuarios_config_gin
+CREATE INDEX idx_config_gin
 ON usuarios_config
 USING GIN (config);
