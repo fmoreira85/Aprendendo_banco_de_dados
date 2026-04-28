@@ -21,3 +21,12 @@ SELECT *
 FROM usuarios_config
 -- WHERE filtra os registros que contem tema dark dentro do JSON
 WHERE config @> '{"tema": "claro"}';
+
+-- Exercicio 5: usar EXPLAIN ANALYZE na busca por tema dark
+-- EXPLAIN ANALYZE mostra o plano de execucao e o tempo gasto na consulta
+EXPLAIN ANALYZE
+SELECT *
+-- FROM define a tabela usada na consulta
+FROM usuarios_config
+-- WHERE filtra os registros que contem tema dark dentro do JSON
+WHERE config @> '{"tema": "claro"}';
