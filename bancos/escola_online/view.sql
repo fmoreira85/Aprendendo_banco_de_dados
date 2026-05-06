@@ -21,3 +21,18 @@ SELECT
 FROM matriculas
 INNER JOIN alunos ON matriculas.id_aluno = alunos.id_aluno
 INNER JOIN cursos ON matriculas.id_curso = cursos.id_curso;
+
+-- 5. Mostrar alunos e suas notas finais
+SELECT 
+    alunos.nome,
+    cursos.nome_curso,
+    matriculas.nota_final
+FROM matriculas
+INNER JOIN alunos ON matriculas.id_aluno = alunos.id_aluno
+INNER JOIN cursos ON matriculas.id_curso = cursos.id_curso
+WHERE matriculas.nota_final IS NOT NULL;
+
+-- 6. Contar quantos alunos existem por cidade
+SELECT cidade, COUNT(*) AS total_alunos
+FROM alunos
+GROUP BY cidade;
