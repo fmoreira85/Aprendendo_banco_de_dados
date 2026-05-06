@@ -15,4 +15,15 @@ CREATE TEBLE cursos (
   categoria VARCHAR(80),
   preco DECIMAL(10,2), 
   carga_horaria INT 
-)
+);
+
+CREATE TABLE matriculas (
+    id_matricula INT AUTO_INCREMENT PRIMARY,
+    id_aluno INT,
+    id_curso INT,
+    data_matricula DATE,
+    status_matricula VARCHAR(30),
+    notal_final DECIMAL(4,2),
+    FOREIGN KEY (id_aluno) REFERENCES alunos(id_aluno),
+    FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
+);
