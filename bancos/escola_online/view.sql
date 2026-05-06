@@ -36,3 +36,29 @@ WHERE matriculas.nota_final IS NOT NULL;
 SELECT cidade, COUNT(*) AS total_alunos
 FROM alunos
 GROUP BY cidade;
+
+-- 7. Contar matrículas por status
+-- Mostra quantas matrículas estão concluídas, cursando ou canceladas.
+SELECT status_matricula, COUNT(*) AS total
+FROM matriculas
+GROUP BY status_matricula;
+
+-- 8. Média das notas finais
+SELECT AVG(nota_final) AS media_geral
+FROM matriculas
+WHERE nota_final IS NOT NULL;
+
+-- 9. Alunos com nota acima da média
+-- Usa subconsulta para comparar cada nota com a média geral.
+SELECT 
+    alunos.nome,
+    cursos.nome_curso,
+    matriculas.nota_final
+FROM matriculas
+INNER JOIN alunos ON matriculas.id_aluno = alunos.id_aluno
+INNER JOIN cursos ON matriculas.id_curso = cursos.id_curso
+WHERE matriculas.nota_final > (
+    SELECT AVG(nota_final)
+    FROM matriculas
+    WHERE nota_final IS NOT NULL
+);
